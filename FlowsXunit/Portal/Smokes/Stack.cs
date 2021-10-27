@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class MyStack<T>
 {
-    readonly LinkedList<T> elements = new LinkedList<T>();
+    public readonly LinkedList<T> elements = new LinkedList<T>();
 
     public bool IsEmpty
     {

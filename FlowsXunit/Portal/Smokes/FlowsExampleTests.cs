@@ -1,12 +1,55 @@
 ﻿using FlowsXunit.FlowXunitExtensions;
 using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Examples
 {
-    public class When_you_have_a_new_stack : FlowSteps<When_you_have_a_new_stack.State>, IFlowFailAllSteps
+    public class When_one_fail_step_fail_not_runned : FlowSteps<When_one_fail_step_fail_not_runned.State>, IFlowFailNotRunnedSteps
     {
-        public When_you_have_a_new_stack(State state)
+        public When_one_fail_step_fail_not_runned(State state)
+            : base(state)
+        {
+        }
+
+        [Step(nameof(should_be_runned_first)), StepOrder(1)]
+        public void should_be_runned_first()
+        {
+            Assert.True(state.Stack.IsEmpty);
+        }
+
+        [Step, StepOrder(2)]
+        public void should_be_runned_second_and_fail()
+        {
+            state.Stack.Pop();
+        }
+
+        [Step, StepOrder(4)]
+        public void should_be_failed_because_of_fail_second()
+        {
+            Assert.NotNull(state.Stack.Pop());
+        }
+
+        [Step, StepOrder(3)]
+        public void should_be_failed_because_of_fail_first()
+        {
+            state.Stack.Push("el");
+        }
+
+        public class State
+        {
+            public MyStack<string> Stack;
+            public State()
+            {
+                Stack = new MyStack<string>();
+            }
+
+        }
+    }
+
+    public class When_order_by_attribute : FlowSteps<When_order_by_attribute.State>, IFlowFailNotRunnedSteps
+    {
+        public When_order_by_attribute(State state)
             : base(state)
         {
         }
@@ -14,25 +57,75 @@ namespace Examples
         [Step(nameof(should_be_empty)), StepOrder(1)]
         public void should_be_empty()
         {
-            Assert.True(state.Stack.IsEmpty);
+            Assert.True(this.state.Stack.IsEmpty);
+            this.state.Stack.Push(nameof(should_be_empty));
         }
 
         [Step, StepOrder(2)]
-        public void should_not_allow_you_to_call_PopTheory()
+        public void should_be_second()
         {
-            Assert.Throws<InvalidOperationException>(() => state.Stack.Pop());
+            Assert.True(this.state.Stack.elements.Count == 1);
+            this.state.Stack.Push(nameof(should_be_second));
         }
 
         [Step, StepOrder(4)]
-        public void should_not_allow_you_to_call_Pop()
+        public void should_be_fourth()
         {
-            Assert.NotNull(state.Stack.Pop());
+            Assert.True(this.state.Stack.elements.Count == 3);
+            this.state.Stack.Push(nameof(should_be_fourth));
         }
 
         [Step, StepOrder(3)]
-        public void should_not_allow_you_to_call_Pop1()
+        public void should_be_third()
         {
-            state.Stack.Push("el");
+            Assert.True(this.state.Stack.elements.Count == 2);
+            this.state.Stack.Push(nameof(should_be_third));
+        }
+
+        public class State
+        {
+            public MyStack<string> Stack;
+            public State()
+            {
+                Stack = new MyStack<string>();
+            }
+
+        }
+    }
+
+    public class When_order_by_name : FlowSteps<When_order_by_name.State>, IFlowFailNotRunnedSteps
+    {
+        public When_order_by_name(State state)
+            : base(state)
+        {
+        }
+
+        [Step($"{nameof(S1)}")]
+        public async Task S1()
+        {
+            Assert.True(this.state.Stack.IsEmpty);
+            this.state.Stack.Push(nameof(S1));
+        }
+
+        [Step($"{nameof(S2)}")]
+        public async Task S2()
+        {
+            Assert.True(this.state.Stack.elements.Count == 1);
+            this.state.Stack.Push(nameof(S2));
+        }
+
+        [Step($"{nameof(S4)}")]
+        public async Task S4()
+        {
+            Assert.True(this.state.Stack.elements.Count == 3);
+            this.state.Stack.Push(nameof(S4));
+        }
+
+        [Step($"{nameof(S3)}")]
+        public async Task S3()
+        {
+            Assert.True(this.state.Stack.elements.Count == 2);
+            this.state.Stack.Push(nameof(S3));
         }
 
         public class State
