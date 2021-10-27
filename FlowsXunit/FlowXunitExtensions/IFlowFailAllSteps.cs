@@ -1,6 +1,6 @@
 ﻿namespace FlowsXunit.FlowXunitExtensions
 {
-    public interface IFlowFailTestClass
+    public interface IFlowFailAllSteps
     {
     }
 }

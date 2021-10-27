@@ -30,7 +30,7 @@ namespace FlowsXunit.FlowXunitExtensions
 
         protected override Task<RunSummary> RunTestMethodsAsync()
         {
-            var shouldFailFast = Class.ToRuntimeType().GetInterfaces().Contains(typeof(IFlowFailTestClass));
+            var shouldFailFast = Class.ToRuntimeType().GetInterfaces().Contains(typeof(IFlowFailAllSteps));
 
             return shouldFailFast ? RunTestMethodsWithFailFastAsync() : RunTestMethodsOriginalAsync();
         }

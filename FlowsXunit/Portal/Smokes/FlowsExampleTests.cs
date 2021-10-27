@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Examples
 {
-    public class When_you_have_a_new_stack : FlowSteps<When_you_have_a_new_stack.State>, IFlowFailTestClass
+    public class When_you_have_a_new_stack : FlowSteps<When_you_have_a_new_stack.State>, IFlowFailAllSteps
     {
         public When_you_have_a_new_stack(State state)
             : base(state)

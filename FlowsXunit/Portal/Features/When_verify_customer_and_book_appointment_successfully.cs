@@ -3,7 +3,7 @@ using FlowsXunit.FlowXunitExtensions;
 
 namespace CustomerPortal.Features.SmsVerification
 {
-    public class When_verify_customer_and_book_appointment_successfully : FlowSteps<When_verify_customer_and_book_appointment_successfully.State>, IFlowFailTestClass
+    public class When_verify_customer_and_book_appointment_successfully : FlowSteps<When_verify_customer_and_book_appointment_successfully.State>, IFlowFailAllSteps
     {
         public When_verify_customer_and_book_appointment_successfully(State state) : base(state)
         {
