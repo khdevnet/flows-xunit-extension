@@ -16,15 +16,15 @@ namespace Requests
         [Step(nameof(should_send_request_and_verify_in_test)), StepOrder(1)]
         public async Task should_send_request_and_verify_in_test()
         {
-            var request = await new My_http_request_step("id").SendAsync();
+            var response = await new My_http_request("id").SendAsync();
 
-            Assert.True(request.Response == HttpResponseExpected);
+            Assert.True(response == HttpResponseExpected);
         }
 
         [Step, StepOrder(2)]
         public async Task should_send_request_and_verify_in_inside_request()
         {
-            await new My_http_request_step("id").SendAndVerifyAsync();
+            await new My_http_request("id").SendAndVerifyAsync();
         }
 
         public class State
@@ -35,6 +35,43 @@ namespace Requests
                 Stack = new MyStack<string>();
             }
 
+        }
+    }
+
+    public class When_http_request_share_state_flow : FlowSteps<When_http_request_share_state_flow.State>, IFlowFailNotRunnedSteps
+    {
+        private const string HttpResponseExpected = "http response";
+
+        public When_http_request_share_state_flow(State state)
+            : base(state)
+        {
+        }
+
+        [Step(nameof(should_send_request_and_verify_in_test)), StepOrder(1)]
+        public async Task should_send_request_and_verify_in_test()
+        {
+            var response = await new My_http_request("id").SendAsync();
+            Assert.True(response == HttpResponseExpected);
+
+            state.FirstRequestResponse = response;
+        }
+
+        [Step, StepOrder(2)]
+        public async Task should_send_request_using_first_request_response()
+        {
+            var response = await new My_http_request_2(this.state.FirstRequestResponse).SendAsync();
+            Assert.True(response == HttpResponseExpected + HttpResponseExpected);
+        }
+
+        public class State
+        {
+            public MyStack<string> Stack;
+            public State()
+            {
+                Stack = new MyStack<string>();
+            }
+
+            public string FirstRequestResponse { get; internal set; }
         }
     }
 }
