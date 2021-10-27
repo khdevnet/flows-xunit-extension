@@ -5,9 +5,9 @@ using Xunit;
 
 namespace Examples
 {
-    public class When_one_fail_step_fail_not_runned : FlowSteps<When_one_fail_step_fail_not_runned.State>, IFlowFailNotRunnedSteps
+    public class FlowsExampleSteps : FlowSteps<FlowsExampleSteps.State>, IFlowFailNotRunnedSteps
     {
-        public When_one_fail_step_fail_not_runned(State state)
+        public FlowsExampleSteps(State state)
             : base(state)
         {
         }

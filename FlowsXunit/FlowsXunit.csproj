@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Portal\Features\" />
+    <Folder Include="Portal\Smokes\" />
   </ItemGroup>
 
 </Project>
