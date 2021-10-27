@@ -5,7 +5,7 @@ using Xunit.Sdk;
 
 namespace FlowsXunit.FlowXunitExtensions
 {
-    public class FlowTestCaseOrderer
+    public class DisplayNameTestCaseOrderer
     {
         public IEnumerable<IXunitTestCase> OrderTestCases(IEnumerable<IXunitTestCase> testCases)
         {

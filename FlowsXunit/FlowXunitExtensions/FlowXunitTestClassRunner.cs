@@ -67,7 +67,7 @@ namespace FlowsXunit.FlowXunitExtensions
             IEnumerable<IXunitTestCase> orderedTestCases;
             try
             {
-                orderedTestCases = new FlowTestCaseOrderer().OrderTestCases(TestCases);
+                orderedTestCases = new StepTestCaseOrderer().OrderTestCases(TestCases);
             }
             catch (Exception ex)
             {
