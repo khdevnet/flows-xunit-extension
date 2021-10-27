@@ -4,13 +4,17 @@ using Xunit;
 
 namespace Requests
 {
+    [Collection(nameof(BeverlyHillsShop))]
     public class When_http_request_flow : FlowSteps<When_http_request_flow.State>, IFlowFailNotRunnedSteps
     {
         private const string HttpResponseExpected = "http response";
+        public BeverlyHillsShop Shop { get; }
 
-        public When_http_request_flow(State state)
+        public When_http_request_flow(State state, BeverlyHillsShop shop)
             : base(state)
         {
+            Shop = shop;
+            Shop.ShopId += nameof(When_http_request_flow);
         }
 
         [Step(nameof(should_send_request_and_verify_in_test)), StepOrder(1)]
@@ -38,14 +42,19 @@ namespace Requests
         }
     }
 
+    [Collection(nameof(BeverlyHillsShop))]
     public class When_http_request_share_state_flow : FlowSteps<When_http_request_share_state_flow.State>, IFlowFailNotRunnedSteps
     {
         private const string HttpResponseExpected = "http response";
 
-        public When_http_request_share_state_flow(State state)
+        public When_http_request_share_state_flow(State state, BeverlyHillsShop shop)
             : base(state)
         {
+            Shop = shop;
+            Shop.ShopId += nameof(When_http_request_share_state_flow);
         }
+
+        public BeverlyHillsShop Shop { get; }
 
         [Step(nameof(should_send_request_and_verify_in_test)), StepOrder(1)]
         public async Task should_send_request_and_verify_in_test()
