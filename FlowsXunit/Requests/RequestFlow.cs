@@ -1,4 +1,5 @@
 ﻿using FlowsXunit.FlowXunitExtensions;
+using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -15,6 +16,12 @@ namespace Requests
         {
             Shop = shop;
             Shop.ShopId += nameof(When_http_request_flow);
+        }
+
+        [Step("read file")]
+        public async Task read_file()
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
         }
 
         [Step(nameof(should_send_request_and_verify_in_test)), StepOrder(1)]
