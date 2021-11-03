@@ -1,8 +1,8 @@
-﻿public static class StepAttributeClassProvider
+﻿public static class StepAttributeTemplate
 {
     public const string ClassName = "StepAttribute";
 
-    public static string Get()
+    public static string GetSource()
         => $@"
 using Xunit;
 

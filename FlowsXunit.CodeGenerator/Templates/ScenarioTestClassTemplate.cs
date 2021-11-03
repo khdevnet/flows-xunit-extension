@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ScenarioTestClassProvider
+public class ScenarioTestClassTemplate
 {
-    public ScenarioTestClassProvider(ITypeSymbol targetType)
+    public ScenarioTestClassTemplate(ITypeSymbol targetType)
     {
         TargetType = targetType;
     }
@@ -46,7 +46,6 @@ namespace {TargetType.ContainingNamespace}
         public partial Task {methodName}();
 ");
         }
-
 
         sb.Append(@"
   }

@@ -1,9 +1,9 @@
-﻿public static class ScenarioAttributeClassProvider
+﻿public static class ScenarioAttributeTemplate
 {
     public const string ClassName = "ScenarioAttribute";
     public const string TextFieldName = "Text";
 
-    public static string Get()
+    public static string GetSource()
         => @$"
 public class {ClassName} : System.Attribute
 {{
