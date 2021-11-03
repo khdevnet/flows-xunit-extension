@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Requests
 {
-    [Scenario(@"
+    [Scenario(Text = @"
 When http request flow
 * send first request
 * send second request

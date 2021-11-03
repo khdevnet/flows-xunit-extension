@@ -1,18 +1,20 @@
 ﻿public static class StepAttributeClassProvider
 {
+    public const string ClassName = "StepAttribute";
+
     public static string Get()
-        => @"
+        => $@"
 using Xunit;
 
-public class StepAttribute : FactAttribute
-{
-    public StepAttribute()
-    {
-    }
+public class {ClassName} : FactAttribute
+{{
+    public {ClassName}()
+    {{
+    }}
 
-    public StepAttribute(string name)
-    {
+    public {ClassName}(string name)
+    {{
         DisplayName = name;
-    }
-}";
+    }}
+}}";
 }

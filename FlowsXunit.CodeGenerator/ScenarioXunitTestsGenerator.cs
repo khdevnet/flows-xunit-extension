@@ -28,19 +28,19 @@ namespace FlowsXunit.CodeGenerator
     [Generator]
     public class ScenarioXunitTestsGenerator : ISourceGenerator
     {
-        private const string ScenarioAttributeClassName = "ScenarioAttribute";
+        private const string BackingFieldSuffix = "BackingField";
 
         public void Initialize(GeneratorInitializationContext context)
         {
-//#if DEBUG
-//            if (!Debugger.IsAttached)
-//            {
-//
-//                Debugger.Launch();
-//
-//            }
+#if DEBUG
+            if (!Debugger.IsAttached)
+            {
 
-//#endif
+                Debugger.Launch();
+
+            }
+
+#endif
 
             context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
         }
@@ -52,13 +52,11 @@ namespace FlowsXunit.CodeGenerator
             var syntaxReceiver = (SyntaxReceiver)context.SyntaxReceiver;
             var xunitTestsTargets = syntaxReceiver.TypeDeclarationsWithAttributes;
 
-            var scenarioSrc = ScenarioAttributeClassProvider.Get();
-            compilation = AddSourceClass(context, compilation, ScenarioAttributeClassName, scenarioSrc);
-            var stepAttributeSrc = StepAttributeClassProvider.Get();
-            compilation = AddSourceClass(context, compilation, "StepAttribute", stepAttributeSrc);
+            compilation = AddSourceClass(context, compilation, ScenarioAttributeClassProvider.ClassName, ScenarioAttributeClassProvider.Get());
+            compilation = AddSourceClass(context, compilation, StepAttributeClassProvider.ClassName, StepAttributeClassProvider.Get());
 
 
-            var scenarioAttribute = compilation.GetTypeByMetadataName(ScenarioAttributeClassName);
+            var scenarioAttributeType = compilation.GetTypeByMetadataName(ScenarioAttributeClassProvider.ClassName);
 
             var targetTypes = new HashSet<ITypeSymbol>();
             foreach (var targetTypeSyntax in xunitTestsTargets)
@@ -67,11 +65,30 @@ namespace FlowsXunit.CodeGenerator
 
                 var semanticModel = compilation.GetSemanticModel(targetTypeSyntax.SyntaxTree);
                 var targetType = semanticModel.GetDeclaredSymbol(targetTypeSyntax);
-                var hasScenarioAttribute = targetType.GetAttributes()
-                  .Any(x => x.AttributeClass.Equals(scenarioAttribute));
 
-                if (!hasScenarioAttribute)
+                var testClassScenarioAttribute = targetType.GetAttributes().SingleOrDefault(attr => attr.AttributeClass.Equals(scenarioAttributeType));
+
+
+                if (testClassScenarioAttribute == null)
+                {
                     continue;
+                }
+                var iconArg = testClassScenarioAttribute.NamedArguments[0];
+                var iconExpr = iconArg.Value.Value as string;
+
+
+
+                var r = testClassScenarioAttribute.AttributeClass.OriginalDefinition.GetType();
+
+                var textField = testClassScenarioAttribute.AttributeClass.GetMembers().OfType<IFieldSymbol>()
+                    .Where(x => x.Name.EndsWith(BackingFieldSuffix))
+                    .FirstOrDefault(fieldSymbol => GetFieldName(fieldSymbol) == ScenarioAttributeClassProvider.TextFieldName);
+
+                if (textField != null)
+                {
+                    var v = textField.ConstantValue;
+                }
+
 
                 if (targetTypeSyntax is not ClassDeclarationSyntax)
                 {
@@ -100,9 +117,14 @@ namespace FlowsXunit.CodeGenerator
             }
         }
 
+        private static string GetFieldName(IFieldSymbol fieldSymbol)
+        {
+            return fieldSymbol.OriginalDefinition.AssociatedSymbol.Name;
+        }
+
         private static Compilation AddSourceClass(
-            GeneratorExecutionContext context, 
-            Compilation compilation, 
+            GeneratorExecutionContext context,
+            Compilation compilation,
             string className,
             string scenarioSrc)
         {
