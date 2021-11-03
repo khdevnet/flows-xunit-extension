@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -32,15 +33,15 @@ namespace FlowsXunit.CodeGenerator
 
         public void Initialize(GeneratorInitializationContext context)
         {
-#if DEBUG
-            if (!Debugger.IsAttached)
-            {
+            //#if DEBUG
+            //            if (!Debugger.IsAttached)
+            //            {
+            //
+            //                Debugger.Launch();
+            //
+            //            }
 
-                Debugger.Launch();
-
-            }
-
-#endif
+            //#endif
 
             context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
         }
@@ -73,22 +74,19 @@ namespace FlowsXunit.CodeGenerator
                 {
                     continue;
                 }
-                var aa = testClassScenarioAttribute.ConstructorArguments[0];
-                var iconExpr = aa.Value as string;
 
-
-
-                var r = testClassScenarioAttribute.AttributeClass.OriginalDefinition.GetType();
-
-                var textField = testClassScenarioAttribute.AttributeClass.GetMembers().OfType<IFieldSymbol>()
-                    .Where(x => x.Name.EndsWith(BackingFieldSuffix))
-                    .FirstOrDefault(fieldSymbol => GetFieldName(fieldSymbol) == ScenarioAttributeClassProvider.TextFieldName);
-
-                if (textField != null)
+                if (testClassScenarioAttribute.ConstructorArguments.Length == 0)
                 {
-                    var v = textField.ConstantValue;
+                    continue;
                 }
 
+                var scenarioText = testClassScenarioAttribute.ConstructorArguments[0];
+                var scenarioTextValue = scenarioText.Value as string;
+
+                if (string.IsNullOrEmpty(scenarioTextValue))
+                {
+                    continue;
+                }
 
                 if (targetTypeSyntax is not ClassDeclarationSyntax)
                 {
@@ -112,14 +110,15 @@ namespace FlowsXunit.CodeGenerator
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
 
-                var proxySource = GenerateProxy(targetType);
-                context.AddSource($"{targetType.Name}.scenario.cs", proxySource);
-            }
-        }
+                var testClassScenarioAttribute = targetType.GetAttributes().SingleOrDefault(attr => attr.AttributeClass.Equals(scenarioAttributeType));
+                var scenarioText = testClassScenarioAttribute.ConstructorArguments[0];
+                var scenarioTextValue = scenarioText.Value as string;
 
-        private static string GetFieldName(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol.OriginalDefinition.AssociatedSymbol.Name;
+
+                var scenraioTestClassProvider = new ScenarioTestClassProvider(targetType);
+                var proxySource = scenraioTestClassProvider.GetSource(scenarioTextValue);
+                context.AddSource($"{scenraioTestClassProvider.ClassName}.scenario.cs", proxySource);
+            }
         }
 
         private static Compilation AddSourceClass(
@@ -134,52 +133,6 @@ namespace FlowsXunit.CodeGenerator
             var logSyntaxTree = CSharpSyntaxTree.ParseText(scenarioSrc, options);
             compilation = compilation.AddSyntaxTrees(logSyntaxTree);
             return compilation;
-        }
-
-        private string GenerateProxy(ITypeSymbol targetType)
-        {
-            var allInterfaceMethods = targetType.AllInterfaces
-              .SelectMany(x => x.GetMembers())
-              .Concat(targetType.GetMembers())
-              .OfType<IMethodSymbol>()
-              .ToList();
-
-            var fullQualifiedName = GetFullQualifiedName(targetType);
-
-            var sb = new StringBuilder();
-            var proxyName = targetType.Name;
-            sb.Append($@"
-using System;
-using System.Text;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using FlowsXunit.FlowXunitExtensions;
-
-namespace {targetType.ContainingNamespace}
-{{
-
-  public partial class {proxyName}
-  {{ ");
-
-
-            sb.Append(@"
-        [Step]
-        public partial Task Test1();
-");
-
-            sb.Append(@"
-  }
-}");
-            return sb.ToString();
-        }
-
-        private static string GetFullQualifiedName(ISymbol symbol)
-        {
-            var containingNamespace = symbol.ContainingNamespace;
-            if (!containingNamespace.IsGlobalNamespace)
-                return containingNamespace.ToDisplayString() + "." + symbol.Name;
-
-            return symbol.Name;
         }
     }
 }
