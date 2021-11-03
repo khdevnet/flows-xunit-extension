@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Requests
 {
-    [Scenario(Text = @"
-When http request flow
+    [Scenario(
+@"When http request flow
 * send first request
 * send second request
 * send third request

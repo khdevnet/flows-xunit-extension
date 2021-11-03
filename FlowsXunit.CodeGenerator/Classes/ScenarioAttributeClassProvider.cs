@@ -7,6 +7,10 @@
         => @$"
 public class {ClassName} : System.Attribute
 {{
+    constructor(string {TextFieldName.ToLower()}) 
+    {{
+       {TextFieldName} = {TextFieldName.ToLower()};
+    }}
     public string {TextFieldName} {{ get; set; }}
 }}";
 }

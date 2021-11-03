@@ -73,8 +73,8 @@ namespace FlowsXunit.CodeGenerator
                 {
                     continue;
                 }
-                var iconArg = testClassScenarioAttribute.NamedArguments[0];
-                var iconExpr = iconArg.Value.Value as string;
+                var aa = testClassScenarioAttribute.ConstructorArguments[0];
+                var iconExpr = aa.Value as string;
 
 
 
