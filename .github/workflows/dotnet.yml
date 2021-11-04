@@ -13,18 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Fetch all history for all tags and branches
-      run: git fetch --prune --unshallow
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9
-      with:
-          versionSpec: '5.1.x'
-    - name: Use GitVersion
-      id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0.9
+    - id: get_version
+      uses: battila7/get-version-action@v2
     - run: |
-        echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
-        echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
+        echo "NuGetVersionV2: ${{ steps.get_version.outputs.version }}"
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -36,6 +28,6 @@ jobs:
     - name: Test
       run: dotnet test
     - name: Pack with dotnet
-      run: dotnet pack src/Raptor.Core.AspNetCore/Raptor.Core.AspNetCore.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }} 
+      run: dotnet pack Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.get_version.outputs.version  }}
     - name: Push with dotnet
-      run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push nuget-packages/Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
