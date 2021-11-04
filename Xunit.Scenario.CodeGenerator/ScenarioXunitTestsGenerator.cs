@@ -16,15 +16,15 @@ namespace Xunit.Scenario.CodeGenerator
     {
         public void Initialize(GeneratorInitializationContext context)
         {
-#if DEBUG
-            if (!Debugger.IsAttached)
-            {
+//#if DEBUG
+//            if (!Debugger.IsAttached)
+//            {
 
-                Debugger.Launch();
+//                Debugger.Launch();
 
-            }
+//            }
 
-#endif
+//#endif
 
             context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
         }

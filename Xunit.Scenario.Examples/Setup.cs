@@ -2,7 +2,3 @@
 using Xunit;
 
 [assembly: TestFramework($"Xunit.Scenario.{nameof(XunitScenarioTestFramework)}", "Xunit.Scenario")]
-
-namespace FlowsXunit
-{
-}
