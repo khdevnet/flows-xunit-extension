@@ -17,23 +17,25 @@ namespace Examples
             Assert.True(state.Stack.IsEmpty);
         }
 
-        [Step, StepOrder(2)]
-        public void should_be_runned_second_and_fail()
-        {
-            state.Stack.Pop();
-        }
+        // Shouldbe runned manually
+        // Should fail
+        //[Step, StepOrder(2)]
+        //public void should_be_runned_second_and_fail()
+        //{
+        //    state.Stack.Pop();
+        //}
 
-        [Step, StepOrder(4)]
-        public void should_be_failed_because_of_fail_second()
-        {
-            Assert.NotNull(state.Stack.Pop());
-        }
+        //[Step, StepOrder(4)]
+        //public void should_be_failed_because_of_fail_second()
+        //{
+        //    Assert.NotNull(state.Stack.Pop());
+        //}
 
-        [Step, StepOrder(3)]
-        public void should_be_failed_because_of_fail_first()
-        {
-            state.Stack.Push("el");
-        }
+        //[Step, StepOrder(3)]
+        //public void should_be_failed_because_of_fail_first()
+        //{
+        //    state.Stack.Push("el");
+        //}
 
         public class State
         {

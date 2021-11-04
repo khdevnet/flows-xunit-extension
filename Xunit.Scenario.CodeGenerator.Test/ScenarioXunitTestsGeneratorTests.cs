@@ -1,3 +1,4 @@
+using Xunit.Scenario.CodeGenerator;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -8,7 +9,7 @@ using VerifyTests;
 using VerifyXunit;
 using Xunit;
 
-namespace FlowsXunit.CodeGenerator.Test
+namespace Xunit.Scenario.CodeGenerator.Test
 {
     [UsesVerify]
     public class ScenarioXunitTestsGeneratorTests
