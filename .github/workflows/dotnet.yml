@@ -26,5 +26,5 @@ jobs:
     - name: Pack with dotnet
       run: dotnet pack Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --output nuget-packages --configuration Release
     - name: Push with dotnet
-      run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push nuget-packages/Xunit.Scenario.CodeGenerator.1.0.0.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
