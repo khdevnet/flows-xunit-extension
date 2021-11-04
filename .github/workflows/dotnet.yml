@@ -10,9 +10,13 @@ jobs:
   build:
 
     runs-on: windows-latest
-
+    if: contains(github.ref, "main")
     steps:
     - uses: actions/checkout@v2
+    - id: get_version
+      uses: battila7/get-version-action@v2
+    - run: |
+        echo "NuGetVersionV2: ${{ steps.get_version.outputs.version }}"
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -24,7 +28,6 @@ jobs:
     - name: Test
       run: dotnet test
     - name: Pack with dotnet
-      run: dotnet pack Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --output nuget-packages --configuration Release
+      run: dotnet pack Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.get_version.outputs.version  }}
     - name: Push with dotnet
-      run: dotnet nuget push nuget-packages/Xunit.Scenario.CodeGenerator.1.0.0.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
-
+      run: dotnet nuget push nuget-packages/Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
