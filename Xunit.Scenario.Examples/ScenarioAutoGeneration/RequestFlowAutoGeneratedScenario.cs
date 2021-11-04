@@ -1,7 +1,7 @@
 ﻿using Xunit.Scenario;
 using System.Threading.Tasks;
 
-namespace Requests
+namespace ScenarioAutoGeneration
 {
     [Scenario(@"
 * send first request
