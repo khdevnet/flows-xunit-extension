@@ -5,6 +5,12 @@
 		<LangVersion>preview</LangVersion>
 		<IsPackable>false</IsPackable>
 		<MSBuildWarningsAsErrors>CS8785</MSBuildWarningsAsErrors>
+		<RepositoryUrl>https://github.com/khdevnet/xunit-scenario</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/khdevnet/xunit-scenario</PackageProjectUrl>
+		<Description>Extends xunit test framework
+* Fail not runned tests if one test fail
+* Run tests in order
+</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
