@@ -1,4 +1,6 @@
-﻿public static class ScenarioAttributeTemplate
+﻿using Xunit.Scenario;
+
+public static class ScenarioAttributeTemplate
 {
-    public const string FullQualifiedName = "Xunit.Scenario.ScenarioAttribute";
+    public static string FullQualifiedName = $"{typeof(ScenarioAttribute).FullName}";
 }
