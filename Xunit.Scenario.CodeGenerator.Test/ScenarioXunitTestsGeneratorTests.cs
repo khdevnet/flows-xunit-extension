@@ -17,14 +17,11 @@ namespace FlowsXunit.CodeGenerator.Test
         public Task CodeGeneratorTests()
         {
             var input = @"
-using System;
-using System.Text;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace DemoTests
 {
-   [Scenario(@$""
+   [Xunit.Scenario.Scenario(@$""
 * step 1
 "")]
    public partial class ProductCategory
