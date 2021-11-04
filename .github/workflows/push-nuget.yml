@@ -22,7 +22,11 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore --configuration Release
-    - name: Pack with dotnet
+    - name: Pack with dotnet Xunit.Scenario.CodeGenerator
       run: dotnet pack Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.get_version.outputs.version-without-v  }}
-    - name: Push with dotnet
-      run: dotnet nuget push nuget-packages/Xunit.Scenario.CodeGenerator/Xunit.Scenario.CodeGenerator.csproj --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+    - name: Pack with dotnet Xunit.Scenario
+      run: dotnet pack Xunit.Scenario/Xunit.Scenario.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.get_version.outputs.version-without-v  }}
+    - name: Push with dotnet Xunit.Scenario.CodeGenerator
+      run: dotnet nuget push nuget-packages/Xunit.Scenario.CodeGenerator.${{ steps.get_version.outputs.version-without-v  }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+    - name: Push with dotnet Xunit.Scenario
+      run: dotnet nuget push nuget-packages/Xunit.Scenario.${{ steps.get_version.outputs.version-without-v  }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
