@@ -12,11 +12,6 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - id: get_version
-      uses: battila7/get-version-action@v2
-    - run: |
-        echo "NuGetVersionV2: ${{ steps.get_version.outputs.version-without-v }}"
-        echo "Github ref: " ${{ github.ref }}
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:

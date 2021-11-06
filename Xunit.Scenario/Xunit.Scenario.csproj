@@ -4,6 +4,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>preview</LangVersion>
 		<IsPackable>true</IsPackable>
+		<IsTestProject>false</IsTestProject>
 		<MSBuildWarningsAsErrors>CS8785</MSBuildWarningsAsErrors>
 		<RepositoryUrl>https://github.com/khdevnet/xunit-scenario</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/khdevnet/xunit-scenario</PackageProjectUrl>
