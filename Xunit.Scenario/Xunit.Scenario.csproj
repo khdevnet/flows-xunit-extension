@@ -1,21 +1,36 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<LangVersion>preview</LangVersion>
-		<IsPackable>true</IsPackable>
-		<IsTestProject>false</IsTestProject>
-		<MSBuildWarningsAsErrors>CS8785</MSBuildWarningsAsErrors>
+		<LangVersion>latest</LangVersion>
+		<!-- Generates a package at build -->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<!-- Do not include the generator as a lib dependency -->
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/khdevnet/xunit-scenario</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/khdevnet/xunit-scenario</PackageProjectUrl>
-		<Description>
-			Xunit scenario runner extension, similar to spec flow, can build Gerkin like tests.
-			The scenario can be generated automatically by using Xunit.Scenario.CodeGenerator nuget.
-		</Description>
-
+		<Description>Extension to Xunit test framework, it autogenerate test classes base on scenario. Works similar to specflow.</Description>
 	</PropertyGroup>
+	<PropertyGroup>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>khdevnet</Authors>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<PackageReference Include="xunit" Version="2.4.1" />
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<!-- Package the generator in the analyzer directory of the nuget package -->
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Xunit.Scenario.Extension\Xunit.Scenario.Extension.csproj" />
+	</ItemGroup>
 </Project>

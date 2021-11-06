@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Xunit.Scenario.CodeGenerator
+namespace Xunit.Scenario
 {
     public class SyntaxReceiver : ISyntaxReceiver
     {

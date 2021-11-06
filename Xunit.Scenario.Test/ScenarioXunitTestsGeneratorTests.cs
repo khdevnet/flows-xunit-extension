@@ -1,4 +1,3 @@
-using Xunit.Scenario.CodeGenerator;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -7,9 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using VerifyTests;
 using VerifyXunit;
-using Xunit;
 
-namespace Xunit.Scenario.CodeGenerator.Test
+namespace Xunit.Scenario.Test
 {
     [UsesVerify]
     public class ScenarioXunitTestsGeneratorTests
@@ -22,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace DemoTests
 {
-   [Xunit.Scenario.Scenario(@$""
+   [Xunit.Scenario.Extension.Scenario(@$""
 * step 1
 * step 2
 "")]

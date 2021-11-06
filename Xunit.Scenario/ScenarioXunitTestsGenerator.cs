@@ -1,15 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
+﻿using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Xunit.Scenario.CodeGenerator
+namespace Xunit.Scenario
 {
     [Generator]
     public class ScenarioXunitTestsGenerator : ISourceGenerator

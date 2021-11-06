@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     public class FlowsXunitTestCollectionRunner : XunitTestCollectionRunner
     {

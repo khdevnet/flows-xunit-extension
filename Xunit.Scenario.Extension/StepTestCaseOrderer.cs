@@ -3,7 +3,7 @@ using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     public class StepTestCaseOrderer : ITestCaseOrderer
     {

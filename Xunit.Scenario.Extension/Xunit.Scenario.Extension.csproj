@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
+		<IsPackable>true</IsPackable>
+		<IsTestProject>false</IsTestProject>
+		<MSBuildWarningsAsErrors>CS8785</MSBuildWarningsAsErrors>
+		<RepositoryUrl>https://github.com/khdevnet/xunit-scenario</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/khdevnet/xunit-scenario</PackageProjectUrl>
+		<Description>
+			Xunit scenario runner extension, similar to spec flow, can build Gerkin like tests.
+			The scenario can be generated automatically by using Xunit.Scenario.Extension.CodeGenerator nuget.
+		</Description>
+
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="xunit" Version="2.4.1" />
+	</ItemGroup>
+
+</Project>

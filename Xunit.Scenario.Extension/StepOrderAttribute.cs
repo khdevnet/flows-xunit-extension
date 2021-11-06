@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class StepOrderAttribute : Attribute

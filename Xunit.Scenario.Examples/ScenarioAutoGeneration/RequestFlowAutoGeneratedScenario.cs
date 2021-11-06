@@ -1,4 +1,4 @@
-﻿using Xunit.Scenario;
+﻿using Xunit.Scenario.Extension;
 using System.Threading.Tasks;
 
 namespace ScenarioAutoGeneration

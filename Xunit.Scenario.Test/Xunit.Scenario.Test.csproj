@@ -21,7 +21,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<ProjectReference Include="..\Xunit.Scenario.CodeGenerator\Xunit.Scenario.CodeGenerator.csproj" OutputItemType="Analyzer" />
+		<ProjectReference Include="..\Xunit.Scenario.Extension\Xunit.Scenario.Extension.csproj" />
 		<ProjectReference Include="..\Xunit.Scenario\Xunit.Scenario.csproj" />
 	</ItemGroup>
 

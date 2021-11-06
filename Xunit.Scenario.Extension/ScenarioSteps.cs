@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     public abstract class ScenarioSteps<TFlowState> : IClassFixture<TFlowState> where TFlowState : class
     {

@@ -1,4 +1,4 @@
-﻿using Xunit.Scenario;
+﻿using Xunit.Scenario.Extension;
 using Xunit;
 
-[assembly: TestFramework($"Xunit.Scenario.{nameof(XunitScenarioTestFramework)}", "Xunit.Scenario")]
+[assembly: TestFramework($"Xunit.Scenario.Extension.{nameof(XunitScenarioTestFramework)}", "Xunit.Scenario.Extension")]

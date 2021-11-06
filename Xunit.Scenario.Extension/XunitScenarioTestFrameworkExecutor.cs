@@ -3,7 +3,7 @@ using System.Reflection;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     public class XunitScenarioTestFrameworkExecutor : XunitTestFrameworkExecutor
     {

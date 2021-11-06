@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     public class XunitScenarioTestClassRunner : XunitTestClassRunner
     {
@@ -41,7 +41,7 @@ namespace Xunit.Scenario
             IEnumerable<IXunitTestCase> orderedTestCases;
             try
             {
-                orderedTestCases = _testCaseOrderer.OrderTestCases(TestCases);
+                orderedTestCases = new StepTestCaseOrderer().OrderTestCases(TestCases);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,4 @@
-﻿using Xunit.Scenario;
+﻿using Xunit.Scenario.Extension;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -55,7 +55,7 @@ namespace Examples
         {
         }
 
-        [Fact(DisplayName = nameof(should_be_empty)), StepOrder(1)]
+        [Fact, StepOrder(1)]
         public void should_be_empty()
         {
             Assert.True(this.state.Stack.IsEmpty);

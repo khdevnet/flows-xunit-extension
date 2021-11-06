@@ -11,7 +11,7 @@ This is a Xunit framework extension. It provides implementations that make it po
 
 # Getting started
 * Create a new Xunit test project
-* Install the [Xunit.Scenario.CodeGenerator](https://www.nuget.org/packages/Xunit.Scenario.CodeGenerator/) nuget package
+* Install the [Xunit.Scenario](https://www.nuget.org/packages/Xunit.Scenario/) nuget package
 * Create the [Setup](https://github.com/khdevnet/xunit-scenario/blob/main/Xunit.Scenario.Examples/Setup.cs) class.
 * Add assembly attribute with XunitScenarioTestFramework setup to it
 ```csharp
@@ -24,6 +24,7 @@ using Xunit;
 * Implement partial methods.
 ```csharp
 using Xunit.Scenario;
+using Xunit.Scenario.Extension;
 using System.Threading.Tasks;
 
 namespace ScenarioAutoGeneration

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Xunit.Scenario
+namespace Xunit.Scenario.Extension
 {
     public class ScenarioAttribute : Attribute
     {
