@@ -15,15 +15,13 @@ This is a Xunit framework extension. It provides implementations that make it po
 * Create the [Setup](https://github.com/khdevnet/xunit-scenario/blob/main/Xunit.Scenario.Examples/Setup.cs) class.
 * Add assembly attribute with XunitScenarioTestFramework setup to it
 ```csharp
-using Xunit.Scenario;
 using Xunit;
 
-[assembly: TestFramework($"Xunit.Scenario.{nameof(XunitScenarioTestFramework)}", "Xunit.Scenario")]
+[assembly: TestFramework("Xunit.Scenario.Extension.XunitScenarioTestFramework", "Xunit.Scenario.Extension")]
 ```
 * Create a new test class and add a scenario attribute with description, test cases will be generated as partial methods
 * Implement partial methods.
 ```csharp
-using Xunit.Scenario;
 using Xunit.Scenario.Extension;
 using System.Threading.Tasks;
 
