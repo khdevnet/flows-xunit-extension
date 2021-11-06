@@ -30,12 +30,13 @@ $@"using System;
 using System.Text;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xunit;
 using Xunit.Scenario;
 
 namespace {TargetType.ContainingNamespace}
 {{
 
-  public partial class {ClassName}
+  public partial class {ClassName} : IScenarioFailNotRunnedSteps
   {{ ");
         for (int i = 0; i < testCases.Count; i++)
         {
@@ -43,7 +44,7 @@ namespace {TargetType.ContainingNamespace}
             var methodName = testCase.Replace(" ", "_");
 
             sb.Append(@$"
-        [Step(""{testCase}"")]
+        [Fact(DisplayName=""{testCase}"")]
         public partial Task {methodName}();
 ");
         }

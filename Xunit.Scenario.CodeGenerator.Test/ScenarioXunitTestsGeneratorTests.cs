@@ -24,6 +24,7 @@ namespace DemoTests
 {
    [Xunit.Scenario.Scenario(@$""
 * step 1
+* step 2
 "")]
    public partial class ProductCategory
    {

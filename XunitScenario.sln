@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xunit.Scenario.CodeGenerato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xunit.Scenario.CodeGenerator.Test", "Xunit.Scenario.CodeGenerator.Test\Xunit.Scenario.CodeGenerator.Test.csproj", "{37C51AE8-3865-47F7-9BC1-FDCACD5BAE22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xunit.Scenario.Examples", "Xunit.Scenario.Examples\Xunit.Scenario.Examples.csproj", "{4F235DCA-194D-46B6-A8BB-19DDA0FFAB25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xunit.Scenario.Examples", "Xunit.Scenario.Examples\Xunit.Scenario.Examples.csproj", "{4F235DCA-194D-46B6-A8BB-19DDA0FFAB25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{66243056-3125-4BEE-825B-DC42C6E908B7}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

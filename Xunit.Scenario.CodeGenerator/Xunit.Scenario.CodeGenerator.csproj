@@ -12,6 +12,13 @@
 		<PackageProjectUrl>https://github.com/khdevnet/xunit-scenario</PackageProjectUrl>
 		<Description>Extension to Xunit test framework, it autogenerate test classes base on scenario. Works similar to specflow.</Description>
 	</PropertyGroup>
+	<PropertyGroup>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
@@ -20,5 +27,9 @@
 	<ItemGroup>
 		<!-- Package the generator in the analyzer directory of the nuget package -->
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Xunit.Scenario\Xunit.Scenario.csproj" />
 	</ItemGroup>
 </Project>

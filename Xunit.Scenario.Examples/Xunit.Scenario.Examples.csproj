@@ -18,8 +18,12 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Xunit.Scenario" Version="1.0.4" />
-		<PackageReference Include="Xunit.Scenario.CodeGenerator" Version="1.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Xunit.Scenario.CodeGenerator\Xunit.Scenario.CodeGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	  <ProjectReference Include="..\Xunit.Scenario\Xunit.Scenario.csproj" />
+	  <!--<ProjectReference Include="..\Xunit.Scenario.CodeGenerator\Xunit.Scenario.CodeGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" /> -->
 	</ItemGroup>
 
 	<ItemGroup>

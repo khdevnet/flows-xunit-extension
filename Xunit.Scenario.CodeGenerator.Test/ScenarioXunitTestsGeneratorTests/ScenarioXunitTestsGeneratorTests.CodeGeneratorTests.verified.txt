@@ -2,15 +2,19 @@
 using System.Text;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xunit;
 using Xunit.Scenario;
 
 namespace DemoTests
 {
 
-  public partial class ProductCategory
+  public partial class ProductCategory : IScenarioFailNotRunnedSteps
   { 
-        [Step("S1 step 1")]
+        [Fact(DisplayName="S1 step 1")]
         public partial Task S1_step_1();
+
+        [Fact(DisplayName="S2 step 2")]
+        public partial Task S2_step_2();
 
   }
 }
