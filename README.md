@@ -3,6 +3,7 @@ This is a Xunit framework extension. It provides implementations that make it po
 * It runs tests in order. 
 * It shares context between tests.
 * It fails not run tests if one test fails in the test class. 
+* Use csharp roslyn code generator .net
 
 # Why Use This Library?
 * It automatically generates readable tests based on scenario text.
