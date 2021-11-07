@@ -5,8 +5,8 @@ This is a Xunit framework extension. It provides implementations that make it po
 * It fails not run tests if one test fails in the test class. 
 
 # Why Use This Library?
-* Spec flow is a good library but it is not free when to use with Azure DevOps.
-* It automatically generates readable test cases based on scenario text.
+* It automatically generates readable tests based on scenario text.
+* Simplifies the creation of UI/API Automation Acceptance Tests.
 * It is an additional extension for Xunit, so it is possible to create scenario tests and regular Xunit tests.
 
 # Getting started
